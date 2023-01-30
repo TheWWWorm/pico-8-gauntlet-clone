@@ -1,0 +1,11 @@
+[] add update to different entities so each can have own counters
+[] add arrows
+[] add spawner logics
+[] add ghost logics and collision
+[] add inventory
+[] add pickup logics
+[] add door logics
+[] add exit logics
+[] add HP and damage logics
+
+Shortcuts ⬅️➡️⬆️⬇️❎🅾️
