@@ -2,7 +2,7 @@ global = {}
 global.frame = 0
 
 function _init()
-	init_player()
+  init_player()
 end
 
 function _update()
@@ -12,7 +12,7 @@ function _update()
   else  
     global.frame+=1
   end
-	check_player_controls()
+  check_player_controls()
 end
  
 function _draw()

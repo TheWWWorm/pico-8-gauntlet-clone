@@ -8,7 +8,7 @@ function can_move(x,y,w,h)
   if (solid(x+w,y)) return false
   if (solid(x,y+h)) return false
   if (solid(x+w,y+h)) return false
-   return true
+  return true
  end
  
  function solid(x,y)
