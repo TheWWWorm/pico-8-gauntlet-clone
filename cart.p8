@@ -1,11 +1,12 @@
 pico-8 cartridge // http://www.pico-8.com
 version 39
 __lua__
+#include ./framework/state.lua
+#include ./framework/camera.lua
+#include ./framework/collision.lua
+#include ./framework/animations.lua
+#include ./entity/player.lua
 #include main.lua
-#include camera.lua
-#include collision.lua
-#include animations.lua
-#include player.lua
 
 __gfx__
 00000000000000000000000066507665d6666666d6666666d6666666d6666166d666666655555555440444446666666600000000000000000000000000000000

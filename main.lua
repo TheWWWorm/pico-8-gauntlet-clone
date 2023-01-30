@@ -1,6 +1,3 @@
-global = {}
-global.frame = 0
-
 function _init()
   init_player()
 end
