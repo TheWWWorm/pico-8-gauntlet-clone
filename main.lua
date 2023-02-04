@@ -1,20 +1,28 @@
 function _init()
-  init_player()
+  global.map = {
+    max_x = 33,
+    max_y = 36
+  }
+  init_map_entities()
 end
 
 function _update()
   -- Support animations until 5seconds
-  if (global.frame == 1800) then
+  if (global.frame == 18000) then
     global.frame = 0
   else  
     global.frame+=1
   end
-  check_player_controls()
+
+  -- Update Entities
+  runEntityUpdate()
 end
  
 function _draw()
+  -- Clear and draw map
   cls()
-  camera_follow()
-  map(0, 0, 0, 0, 33,36)
-  draw_player() 
+  map(0, 0, 0, 0, global.map.max_x, global.map.max_y)
+
+  -- Draw entities
+  runEntityDraw()
 end

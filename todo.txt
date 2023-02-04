@@ -1,6 +1,6 @@
-[] add update to different entities so each can have own counters
-[] add arrows
-[] add spawner logics
+[x] add update to different entities so each can have own counters
+[x] add arrows
+[x] add spawner logics
 [] add ghost logics and collision
 [] add inventory
 [] add pickup logics

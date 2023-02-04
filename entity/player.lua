@@ -1,47 +1,78 @@
-function init_player()
-  p={}
+function player_init(state)
+  state.id = global.latestId
   -- start pos
-  p.x=56
-  p.y=56
+  state.x = 56
+  state.y = 56
   -- player speed
-  p.spd = 1
+  state.spd = 1
   -- intended movement
-  p.dx=0
-  p.dy=0
+  state.dx = 0
+  state.dy = 0
   -- player size
-  p.w=7
-  p.h=7	
+  state.w = 7
+  state.h = 7	
   -- player sprite
-	p.sprites= {17, 18}
-  p.invertX= false
+	state.sprites = {17, 18}
+  state.invertX = false
+  state.attackCooldown = 0
+  return state
 end
 
-function check_player_controls() 
-  player_move()
-  player_attack()
+function player_update(state) 
+  player_move(state)
+  player_attack(state)
+  state.attackCooldown -= 1
 end
 
-function player_move()
-  p.dx,p.dy=0,0
-  if (btn(⬅️)) p.dx-=p.spd
-  if (btn(➡️)) p.dx+=p.spd
-  if (btn(⬆️)) p.dy-=p.spd
-  if (btn(⬇️)) p.dy+=p.spd
+function player_move(state)
+  state.dx, state.dy= 0, 0
+  if (btn(⬅️)) state.dx-=state.spd
+  if (btn(➡️)) state.dx+=state.spd
+  if (btn(⬆️)) state.dy-=state.spd
+  if (btn(⬇️)) state.dy+=state.spd
 
- if (can_move(p.x+p.dx,p.y,p.w,p.h)) then
-  p.x+=p.dx
- end
- 
- if (can_move(p.x,p.y+p.dy,p.w,p.h)) then
-    p.y+=p.dy
+  if (can_move(state.x + state.dx, state.y, state.w, state.h)) then
+    state.x += state.dx
+  end
+  
+  if (can_move(state.x, state.y + state.dy, state.w, state.h)) then
+    state.y += state.dy
   end
 end
 
-function player_attack()
+function player_attack(state)
+  if (btnp(❎) and state.attackCooldown <= 0) then
+    projectileDx = state.dx
+    if state.dx == 0 and state.dy == 0  then
+      projectileDx = state.invertX and -1 or 1
+    end
+    projectile_register({
+      x = state.x,
+      y = state.y,
+      dx = projectileDx,
+      dy = state.dy,
+      spd = 2,
+      sprites = { 40 },
+      invertX = state.invertX,
+      maxFrames = 90
+    })
+    state.attackCooldown = 10
+  end
 end
 
-function draw_player() 
-  if (p.dx == -1) p.invertX = true
-  if (p.dx == 1) p.invertX = false
-  animate_spr(p.sprites,p.x,p.y, 8, p.invertX)
+function player_draw(state) 
+  if (state.dx == -1) state.invertX = true
+  if (state.dx == 1) state.invertX = false
+  animate_spr(state.sprites, state.x, state.y, 8, state.invertX)
+  camera_follow(state)
 end
+
+function player_register()
+  addEntityToState({
+    state = player_init({}),
+    update = player_update,
+    draw = player_draw,
+  })
+end
+
+player_register()
