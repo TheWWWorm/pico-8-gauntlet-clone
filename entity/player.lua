@@ -21,7 +21,7 @@ end
 function player_update(state) 
   player_move(state)
   player_attack(state)
-  state.attackCooldown -= 1
+  if (state.attackCooldown > 0) state.attackCooldown -= 1
 end
 
 function player_move(state)

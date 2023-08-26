@@ -2,6 +2,7 @@ function spawner_init(state)
   state.id = global.latestId
   state.w = 7
   state.h = 7	
+  -- TODO: fix spawner render! It overlays over tile?
   state.sprites= {36, 37}
   state.invertX = false
   return state
